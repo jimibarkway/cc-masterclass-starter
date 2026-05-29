@@ -20,6 +20,7 @@ That checks your machine, prepares your environment file, and tells you exactly 
 - `.env.example`, every key your app needs, with notes on where to get each one.
 - `.claude/`, your project settings and the skills reference.
 - `docs/stack.md`, a one-pager on every tool you'll use, what it costs, and when to upgrade.
+- `docs/troubleshooting.md`, the "stuck? read this" guide for the errors you'll actually hit.
 - `setup`, the one command that gets you ready.
 
 ## What's not in here (on purpose)
@@ -33,3 +34,7 @@ After `./setup`, open Claude Code in this folder and say:
 > Read CLAUDE.md, then help me fill in the project details at the top.
 
 See you in the lesson.
+
+## When you get stuck
+
+Open `docs/troubleshooting.md`. It covers the errors a first-time builder actually hits (Node not found, env vars not loading, Supabase row-level-security, Stripe webhooks, Vercel build fails) with the fix and the exact prompt to paste into Claude Code for each one.
