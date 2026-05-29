@@ -1,0 +1,55 @@
+#!/bin/sh
+# Claude Code Masterclass, one-command setup.
+# Safe to run more than once.
+
+set -e
+
+say() { printf "\n%s\n" "$1"; }
+
+say "Checking your machine..."
+
+if ! command -v node >/dev/null 2>&1; then
+  say "Node.js is not installed. Get the LTS version from https://nodejs.org then run ./setup again."
+  exit 1
+fi
+say "node found: $(node --version)"
+
+if ! command -v git >/dev/null 2>&1; then
+  say "git is not installed. Get it from https://git-scm.com/downloads then run ./setup again."
+  exit 1
+fi
+say "git found: $(git --version)"
+
+# Prepare the environment file (Next.js reads .env.local for local secrets)
+if [ -f .env.local ]; then
+  say ".env.local already exists, leaving it as is."
+else
+  cp .env.example .env.local
+  say "Created .env.local from .env.example. Fill in your keys when the lesson tells you to."
+fi
+
+# Fetch the direct-response copywriting skill into the global skills folder (a course step)
+SKILLS_DIR="$HOME/.claude/skills"
+DR_SKILL="$SKILLS_DIR/direct-response-copywriting.md"
+DR_URL="https://gist.githubusercontent.com/jimibarkway/7f5a7dbb0d1dd107401fe04ec431105c/raw"
+if [ -f "$DR_SKILL" ]; then
+  say "Direct-response copywriting skill already installed."
+else
+  mkdir -p "$SKILLS_DIR"
+  if command -v curl >/dev/null 2>&1 && curl -fsSL "$DR_URL" -o "$DR_SKILL" 2>/dev/null; then
+    say "Installed the direct-response copywriting skill."
+  else
+    rm -f "$DR_SKILL"
+    say "Could not auto-fetch the copywriting skill (no internet?). See .claude/SKILLS.md to add it later. Not a blocker."
+  fi
+fi
+
+printf "\n%s\n" "----------------------------------------"
+printf "%s\n" "Done. You are ready to build."
+printf "%s\n" ""
+printf "%s\n" "Global skills from Modules 1 and 2 (superpowers, impeccable, last30days)"
+printf "%s\n" "should already be active. If not, see .claude/SKILLS.md."
+printf "%s\n" ""
+printf "%s\n" "Next: open Claude Code in this folder and say:"
+printf "%s\n" "  \"Read CLAUDE.md, then help me fill in the project details at the top.\""
+printf "%s\n" "----------------------------------------"
