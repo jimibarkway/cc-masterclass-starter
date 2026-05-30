@@ -20,6 +20,7 @@ That checks your machine, prepares your environment file, and tells you exactly 
 - `.env.example`, every key your app needs, with notes on where to get each one.
 - `.claude/`, your project settings and the skills reference.
 - `docs/stack.md`, a one-pager on every tool you'll use, what it costs, and when to upgrade.
+- `docs/prompt-pack.md`, the exact prompts to paste into Claude Code at each step of the build.
 - `docs/troubleshooting.md`, the "stuck? read this" guide for the errors you'll actually hit.
 - `setup`, the one command that gets you ready.
 
